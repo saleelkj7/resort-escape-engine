@@ -11,6 +11,16 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as DiningRouteImport } from './routes/dining'
+import { Route as ExperiencesRouteImport } from './routes/experiences'
+import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as OffersRouteImport } from './routes/offers'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as TermsRouteImport } from './routes/terms'
+import { Route as WeddingsRouteImport } from './routes/weddings'
+import { Route as StayIndexRouteImport } from './routes/stay.index'
+import { Route as StaySlugRouteImport } from './routes/stay.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +32,158 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DiningRoute = DiningRouteImport.update({
+  id: '/dining',
+  path: '/dining',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExperiencesRoute = ExperiencesRouteImport.update({
+  id: '/experiences',
+  path: '/experiences',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OffersRoute = OffersRouteImport.update({
+  id: '/offers',
+  path: '/offers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WeddingsRoute = WeddingsRouteImport.update({
+  id: '/weddings',
+  path: '/weddings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StayIndexRoute = StayIndexRouteImport.update({
+  id: '/stay/',
+  path: '/stay/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StaySlugRoute = StaySlugRouteImport.update({
+  id: '/stay/$slug',
+  path: '/stay/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/dining': typeof DiningRoute
+  '/experiences': typeof ExperiencesRoute
+  '/gallery': typeof GalleryRoute
+  '/offers': typeof OffersRoute
+  '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
+  '/weddings': typeof WeddingsRoute
+  '/stay/$slug': typeof StaySlugRoute
+  '/stay/': typeof StayIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/dining': typeof DiningRoute
+  '/experiences': typeof ExperiencesRoute
+  '/gallery': typeof GalleryRoute
+  '/offers': typeof OffersRoute
+  '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
+  '/weddings': typeof WeddingsRoute
+  '/stay/$slug': typeof StaySlugRoute
+  '/stay': typeof StayIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/dining': typeof DiningRoute
+  '/experiences': typeof ExperiencesRoute
+  '/gallery': typeof GalleryRoute
+  '/offers': typeof OffersRoute
+  '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
+  '/weddings': typeof WeddingsRoute
+  '/stay/$slug': typeof StaySlugRoute
+  '/stay/': typeof StayIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/dining'
+    | '/experiences'
+    | '/gallery'
+    | '/offers'
+    | '/privacy'
+    | '/terms'
+    | '/weddings'
+    | '/stay/$slug'
+    | '/stay/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about'
-  id: '__root__' | '/' | '/about'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/dining'
+    | '/experiences'
+    | '/gallery'
+    | '/offers'
+    | '/privacy'
+    | '/terms'
+    | '/weddings'
+    | '/stay/$slug'
+    | '/stay'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/dining'
+    | '/experiences'
+    | '/gallery'
+    | '/offers'
+    | '/privacy'
+    | '/terms'
+    | '/weddings'
+    | '/stay/$slug'
+    | '/stay/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  ContactRoute: typeof ContactRoute
+  DiningRoute: typeof DiningRoute
+  ExperiencesRoute: typeof ExperiencesRoute
+  GalleryRoute: typeof GalleryRoute
+  OffersRoute: typeof OffersRoute
+  PrivacyRoute: typeof PrivacyRoute
+  TermsRoute: typeof TermsRoute
+  WeddingsRoute: typeof WeddingsRoute
+  StaySlugRoute: typeof StaySlugRoute
+  StayIndexRoute: typeof StayIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +202,92 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dining': {
+      id: '/dining'
+      path: '/dining'
+      fullPath: '/dining'
+      preLoaderRoute: typeof DiningRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/experiences': {
+      id: '/experiences'
+      path: '/experiences'
+      fullPath: '/experiences'
+      preLoaderRoute: typeof ExperiencesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/offers': {
+      id: '/offers'
+      path: '/offers'
+      fullPath: '/offers'
+      preLoaderRoute: typeof OffersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/weddings': {
+      id: '/weddings'
+      path: '/weddings'
+      fullPath: '/weddings'
+      preLoaderRoute: typeof WeddingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stay/': {
+      id: '/stay/'
+      path: '/stay'
+      fullPath: '/stay/'
+      preLoaderRoute: typeof StayIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stay/$slug': {
+      id: '/stay/$slug'
+      path: '/stay/$slug'
+      fullPath: '/stay/$slug'
+      preLoaderRoute: typeof StaySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  ContactRoute: ContactRoute,
+  DiningRoute: DiningRoute,
+  ExperiencesRoute: ExperiencesRoute,
+  GalleryRoute: GalleryRoute,
+  OffersRoute: OffersRoute,
+  PrivacyRoute: PrivacyRoute,
+  TermsRoute: TermsRoute,
+  WeddingsRoute: WeddingsRoute,
+  StaySlugRoute: StaySlugRoute,
+  StayIndexRoute: StayIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

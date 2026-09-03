@@ -67,12 +67,12 @@ export function Lightbox({
       </button>
       <figure className="max-h-[85vh] max-w-5xl">
         <img
-          src={current.src}
-          alt={current.alt}
+          src={current?.src}
+          alt={current?.alt ?? ""}
           className="max-h-[78vh] w-auto object-contain"
         />
         <figcaption className="mt-4 text-center text-xs uppercase tracking-[0.2em] text-ivory/70">
-          {current.alt} — {index + 1} / {images.length}
+          {current?.alt} — {index + 1} / {images.length}
         </figcaption>
       </figure>
       <button

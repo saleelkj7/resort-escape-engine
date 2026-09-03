@@ -26,20 +26,34 @@ const num = (v: unknown, fallback: number, min: number, max: number) => {
 const str = (v: unknown) => (typeof v === "string" ? v : "");
 
 export function validateBookingSearch(search: Record<string, unknown>): BookingSearch {
-  const step = str(search.step);
+  const step = str(search["step"]);
+  const room = str(search["room"]);
   return {
-    checkIn: str(search.checkIn),
-    checkOut: str(search.checkOut),
-    adults: num(search.adults, 2, 1, 20),
-    children: num(search.children, 0, 0, 20),
-    rooms: num(search.rooms, 1, 1, 20),
-    room: str(search.room) || undefined,
+    checkIn: str(search["checkIn"]) || todayISO(),
+    checkOut: str(search["checkOut"]) || tomorrowISO(),
+    adults: num(search["adults"], 2, 1, 20),
+    children: num(search["children"], 0, 0, 20),
+    rooms: num(search["rooms"], 1, 1, 20),
+    ...(room ? { room } : {}),
     step:
       step === "select" || step === "guest" || step === "summary" || step === "confirmation"
         ? step
-        : undefined,
+        : "select",
   };
 }
+
+/** Default search params for links into the booking journey. */
+export const defaultBookingSearch = (
+  overrides: Partial<BookingSearch> = {},
+): BookingSearch => ({
+  checkIn: todayISO(),
+  checkOut: tomorrowISO(),
+  adults: 2,
+  children: 0,
+  rooms: 1,
+  step: "select",
+  ...overrides,
+});
 
 export const todayISO = () => new Date().toISOString().slice(0, 10);
 

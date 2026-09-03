@@ -1,3 +1,4 @@
+import { defaultBookingSearch } from "@/lib/booking";
 import { Link } from "@tanstack/react-router";
 import { Menu, Phone, X, MessageCircle } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -83,7 +84,7 @@ export function SiteHeader() {
             <Phone className="h-4 w-4" aria-hidden="true" />
           </a>
           <Btn asChild variant={scrolled ? "solid" : "light"} size="sm" className="hidden sm:inline-flex">
-            <Link to="/booking">Book Now</Link>
+            <Link to="/booking" search={defaultBookingSearch()}>Book Now</Link>
           </Btn>
           <button
             type="button"
@@ -136,7 +137,7 @@ export function SiteHeader() {
           </nav>
           <div className="mt-auto grid gap-3 pt-8">
             <Btn asChild variant="gold" size="md">
-              <Link to="/booking" onClick={() => setOpen(false)}>
+              <Link to="/booking" search={defaultBookingSearch()} onClick={() => setOpen(false)}>
                 Book Now
               </Link>
             </Btn>

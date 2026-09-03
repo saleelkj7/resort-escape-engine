@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { defaultBookingSearch } from "@/lib/booking";
 import { useState } from "react";
 import { Star, MapPin, Clock, Car } from "lucide-react";
 
@@ -71,7 +72,7 @@ function Home() {
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
               <Btn asChild variant="gold" size="lg">
-                <Link to="/booking">Book Your Stay</Link>
+                <Link to="/booking" search={defaultBookingSearch()}>Book Your Stay</Link>
               </Btn>
               <Btn asChild variant="light" size="lg">
                 <Link to="/stay">Explore Rooms</Link>

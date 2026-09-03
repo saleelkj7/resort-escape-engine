@@ -1,3 +1,4 @@
+import { defaultBookingSearch } from "@/lib/booking";
 import { Link } from "@tanstack/react-router";
 import { MessageCircle } from "lucide-react";
 import hero from "@/assets/hero-resort.jpg";
@@ -34,7 +35,7 @@ export function CtaBand({
           <p className="mx-auto mt-6 max-w-xl text-base text-ivory/80">{body}</p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Btn asChild variant="gold" size="lg">
-              <Link to="/booking">Book Your Stay</Link>
+              <Link to="/booking" search={defaultBookingSearch()}>Book Your Stay</Link>
             </Btn>
             <Btn asChild variant="light" size="lg">
               <a href={whatsappHref(waMessage)} target="_blank" rel="noopener noreferrer">

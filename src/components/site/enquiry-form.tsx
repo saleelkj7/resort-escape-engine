@@ -19,7 +19,7 @@ export const enquiryTypes = [
   "General Enquiry",
 ] as const;
 
-type Errors = Partial<Record<string, string>>;
+type Errors = { name?: string; phone?: string; email?: string; checkIn?: string; checkOut?: string; message?: string };
 
 const field =
   "h-12 w-full border-0 border-b border-border bg-transparent px-0 text-sm outline-none transition-colors focus:border-gold";
@@ -35,12 +35,12 @@ export function EnquiryForm({ defaultType = "Room Booking" }: { defaultType?: st
     const data = Object.fromEntries(new FormData(e.currentTarget)) as Record<string, string>;
     const next: Errors = {};
 
-    if (!data.name?.trim() || data.name.trim().length < 2) next.name = "Please enter your name.";
-    if (!/^[0-9+\-\s()]{7,16}$/.test(data.phone ?? "")) next.phone = "Please enter a valid phone number.";
-    if (data.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) next.email = "Please enter a valid email address.";
-    if (data.checkIn && data.checkOut && new Date(data.checkOut) <= new Date(data.checkIn))
+    if (!data["name"]?.trim() || data["name"].trim().length < 2) next.name = "Please enter your name.";
+    if (!/^[0-9+\-\s()]{7,16}$/.test(data["phone"] ?? "")) next.phone = "Please enter a valid phone number.";
+    if (data["email"] && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data["email"])) next.email = "Please enter a valid email address.";
+    if (data["checkIn"] && data["checkOut"] && new Date(data["checkOut"]) <= new Date(data["checkIn"]))
       next.checkOut = "Check-out must be after check-in.";
-    if (!data.message?.trim() || data.message.trim().length < 10)
+    if (!data["message"]?.trim() || data["message"].trim().length < 10)
       next.message = "Please tell us a little about your plans (10 characters or more).";
 
     setErrors(next);

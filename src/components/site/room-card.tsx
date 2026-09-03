@@ -1,3 +1,4 @@
+import { defaultBookingSearch } from "@/lib/booking";
 import { Link } from "@tanstack/react-router";
 import { BedDouble, Users } from "lucide-react";
 import type { Room } from "@/data/rooms";
@@ -69,7 +70,7 @@ export function RoomCard({ room, delay = 0 }: { room: Room; delay?: number }) {
             </Link>
           </Btn>
           <Btn asChild variant="solid" size="sm">
-            <Link to="/booking" search={{ room: room.slug, step: "select" as const }}>
+            <Link to="/booking" search={defaultBookingSearch({ room: room.slug })}>
               Book Now
             </Link>
           </Btn>

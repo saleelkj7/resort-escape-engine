@@ -1,3 +1,4 @@
+import { defaultBookingSearch } from "@/lib/booking";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import { Check } from "lucide-react";
@@ -151,7 +152,7 @@ function RoomDetail() {
             </p>
             <div className="mt-8 space-y-3">
               <Btn asChild variant="solid" size="md" className="w-full">
-                <Link to="/booking" search={{ room: room.slug, step: "select" as const }}>
+                <Link to="/booking" search={defaultBookingSearch({ room: room.slug })}>
                   Book This Room
                 </Link>
               </Btn>

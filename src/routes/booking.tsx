@@ -477,7 +477,7 @@ function SummaryStep({
   search: BookingSearch;
   guest: GuestDetails;
   nights: number;
-  roomName?: string;
+  roomName?: string | undefined;
   onBack: () => void;
   onConfirm: () => void;
 }) {
@@ -526,7 +526,7 @@ function ConfirmationStep({
 }: {
   search: BookingSearch;
   guest: GuestDetails;
-  roomName?: string;
+  roomName?: string | undefined;
 }) {
   const message = `Hello ${siteConfig.name}, I have sent a booking request${
     roomName ? ` for the ${roomName}` : ""

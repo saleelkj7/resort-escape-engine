@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { defaultBookingSearch } from "@/lib/booking";
 import pool from "@/assets/pool.jpg";
 import { PageHero } from "@/components/site/page-hero";
 import { SectionHeading } from "@/components/site/section-heading";
@@ -80,7 +81,7 @@ function Offers() {
                 </dl>
                 <div className="mt-7 flex flex-wrap gap-3">
                   <Btn asChild variant="solid" size="sm">
-                    <Link to="/booking">Book Now</Link>
+                    <Link to="/booking" search={defaultBookingSearch()}>Book Now</Link>
                   </Btn>
                   <Btn asChild variant="outline" size="sm">
                     <a href={whatsappHref(waMessages.offer(o.title))} target="_blank" rel="noopener noreferrer">

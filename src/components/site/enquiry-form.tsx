@@ -19,7 +19,7 @@ export const enquiryTypes = [
   "General Enquiry",
 ] as const;
 
-type Errors = Partial<Record<string, string>>;
+type Errors = { name?: string; phone?: string; email?: string; checkIn?: string; checkOut?: string; message?: string };
 
 const field =
   "h-12 w-full border-0 border-b border-border bg-transparent px-0 text-sm outline-none transition-colors focus:border-gold";

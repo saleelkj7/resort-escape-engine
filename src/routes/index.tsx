@@ -36,9 +36,9 @@ export const Route = createFileRoute("/")({
       { name: "description", content: siteConfig.description },
       { property: "og:title", content: `${siteConfig.name} — Resort in Gorai, Mumbai` },
       { property: "og:description", content: siteConfig.description },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: "https://resort-escape-engine.lovable.app/" },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: "https://resort-escape-engine.lovable.app/" }],
   }),
   component: Home,
 });

@@ -19,9 +19,11 @@ export const Route = createFileRoute("/weddings")({
       { name: "description", content: description },
       { property: "og:title", content: title },
       { property: "og:description", content: description },
+      { property: "og:url", content: "https://resort-escape-engine.lovable.app/weddings" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+  links: [{ rel: "canonical", href: "https://resort-escape-engine.lovable.app/weddings" }],
   }),
   component: Weddings,
 });

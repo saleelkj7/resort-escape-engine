@@ -19,9 +19,9 @@ export const Route = createFileRoute("/about")({
       { name: "description", content: description },
       { property: "og:title", content: title },
       { property: "og:description", content: description },
-      { property: "og:url", content: "/about" },
+      { property: "og:url", content: "https://resort-escape-engine.lovable.app/about" },
     ],
-    links: [{ rel: "canonical", href: "/about" }],
+    links: [{ rel: "canonical", href: "https://resort-escape-engine.lovable.app/about" }],
   }),
   component: About,
 });

@@ -12,9 +12,11 @@ export const Route = createFileRoute("/terms")({
       { name: "description", content: description },
       { property: "og:title", content: title },
       { property: "og:description", content: description },
+      { property: "og:url", content: "https://resort-escape-engine.lovable.app/terms" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
+  links: [{ rel: "canonical", href: "https://resort-escape-engine.lovable.app/terms" }],
   }),
   component: Terms,
 });

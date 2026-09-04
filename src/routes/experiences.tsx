@@ -18,9 +18,11 @@ export const Route = createFileRoute("/experiences")({
       { name: "description", content: description },
       { property: "og:title", content: title },
       { property: "og:description", content: description },
+      { property: "og:url", content: "https://resort-escape-engine.lovable.app/experiences" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+  links: [{ rel: "canonical", href: "https://resort-escape-engine.lovable.app/experiences" }],
   }),
   component: Experiences,
 });

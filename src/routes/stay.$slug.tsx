@@ -26,14 +26,46 @@ export const Route = createFileRoute("/stay/$slug")({
     }
     const { room } = loaderData;
     const title = `${room.name} — ${siteConfig.name}`;
+    const url = `https://resort-escape-engine.lovable.app/stay/${room.slug}`;
+    const overnight = room.tariffs.find((t) => t.label === "Overnight Stay" && t.price !== null);
     return {
       meta: [
         { title },
         { name: "description", content: room.short },
         { property: "og:title", content: title },
         { property: "og:description", content: room.short },
+        { property: "og:url", content: url },
         { property: "og:type", content: "website" },
         { name: "twitter:card", content: "summary_large_image" },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "HotelRoom",
+            name: room.name,
+            description: room.short,
+            url,
+            amenityFeature: room.amenities.map((a) => ({
+              "@type": "LocationFeatureSpecification",
+              name: a,
+              value: true,
+            })),
+            containedInPlace: { "@type": "Resort", name: siteConfig.name },
+            ...(overnight
+              ? {
+                  offers: {
+                    "@type": "Offer",
+                    price: overnight.price,
+                    priceCurrency: siteConfig.currency,
+                    availability: "https://schema.org/InStock",
+                  },
+                }
+              : {}),
+          }),
+        },
       ],
     };
   },

@@ -13,15 +13,16 @@ const description =
   "Rehcruz D Retreat is a green resort on the Gorai–Manori road in Borivali West, Mumbai, with rooms, cottages, a private villa, a pool and event lawns.";
 
 export const Route = createFileRoute("/about")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title },
       { name: "description", content: description },
       { property: "og:title", content: title },
       { property: "og:description", content: description },
-      { property: "og:url", content: "/about" },
+      { property: "og:url", content: "https://resort-escape-engine.lovable.app/about" },
     ],
-    links: [{ rel: "canonical", href: "/about" }],
+    links: [{ rel: "canonical", href: "https://resort-escape-engine.lovable.app/about" }],
   }),
   component: About,
 });

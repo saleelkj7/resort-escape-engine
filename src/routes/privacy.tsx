@@ -6,15 +6,18 @@ const description =
   "How Rehcruz D Retreat collects and uses the information you share when you enquire or book a stay.";
 
 export const Route = createFileRoute("/privacy")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title },
       { name: "description", content: description },
       { property: "og:title", content: title },
       { property: "og:description", content: description },
+      { property: "og:url", content: "https://resort-escape-engine.lovable.app/privacy" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
+  links: [{ rel: "canonical", href: "https://resort-escape-engine.lovable.app/privacy" }],
   }),
   component: Privacy,
 });

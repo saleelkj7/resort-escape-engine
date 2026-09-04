@@ -19,6 +19,7 @@ const description =
   "Send a booking request for rooms, cottages or the private villa at Rehcruz D Retreat, Gorai, Borivali West. Our team confirms availability and rates directly.";
 
 export const Route = createFileRoute("/booking")({
+  staticData: { sitemap: false },
   validateSearch: (search: Record<string, unknown>) => validateBookingSearch(search),
   head: () => ({
     meta: [
@@ -26,12 +27,12 @@ export const Route = createFileRoute("/booking")({
       { name: "description", content: description },
       { property: "og:title", content: title },
       { property: "og:description", content: description },
-      { property: "og:url", content: "/booking" },
+      { property: "og:url", content: "https://resort-escape-engine.lovable.app/booking" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "robots", content: "noindex" },
     ],
-    links: [{ rel: "canonical", href: "/booking" }],
+    links: [{ rel: "canonical", href: "https://resort-escape-engine.lovable.app/booking" }],
   }),
   component: BookingPage,
 });

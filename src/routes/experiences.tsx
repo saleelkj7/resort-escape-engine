@@ -12,15 +12,18 @@ const description =
   "The pool, green surroundings, one-day picnics, open-air dining and celebrations at Rehcruz D Retreat in Gorai, Borivali West, Mumbai.";
 
 export const Route = createFileRoute("/experiences")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title },
       { name: "description", content: description },
       { property: "og:title", content: title },
       { property: "og:description", content: description },
+      { property: "og:url", content: "https://resort-escape-engine.lovable.app/experiences" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+  links: [{ rel: "canonical", href: "https://resort-escape-engine.lovable.app/experiences" }],
   }),
   component: Experiences,
 });

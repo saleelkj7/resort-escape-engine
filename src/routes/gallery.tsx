@@ -14,6 +14,7 @@ const description =
   "Photographs of the pool, gardens, rooms, cottages, dining and event spaces at Rehcruz D Retreat in Gorai, Borivali West, Mumbai.";
 
 export const Route = createFileRoute("/gallery")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title },

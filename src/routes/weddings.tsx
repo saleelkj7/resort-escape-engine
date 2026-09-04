@@ -13,6 +13,7 @@ const description =
   "Host weddings, pre-wedding functions, corporate offsites and private celebrations on the lawns and indoor spaces at Rehcruz D Retreat, Gorai, Mumbai.";
 
 export const Route = createFileRoute("/weddings")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title },

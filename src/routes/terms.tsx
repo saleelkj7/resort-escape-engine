@@ -6,6 +6,7 @@ const description =
   "Booking, tariff, check-in and cancellation terms for stays and events at Rehcruz D Retreat, Gorai, Mumbai.";
 
 export const Route = createFileRoute("/terms")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title },

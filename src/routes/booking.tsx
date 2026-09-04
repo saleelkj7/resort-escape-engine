@@ -19,6 +19,7 @@ const description =
   "Send a booking request for rooms, cottages or the private villa at Rehcruz D Retreat, Gorai, Borivali West. Our team confirms availability and rates directly.";
 
 export const Route = createFileRoute("/booking")({
+  staticData: { sitemap: false },
   validateSearch: (search: Record<string, unknown>) => validateBookingSearch(search),
   head: () => ({
     meta: [

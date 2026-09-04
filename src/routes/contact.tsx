@@ -20,6 +20,7 @@ const description =
   "Call, WhatsApp or email Rehcruz D Retreat, Gorai–Manori Road, Culvem Village, Borivali West, Mumbai. Directions, contact numbers and enquiry form.";
 
 export const Route = createFileRoute("/contact")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title },

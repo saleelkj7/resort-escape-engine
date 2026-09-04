@@ -14,6 +14,7 @@ const description =
   "Seven ways to stay at Rehcruz D Retreat, Gorai: deluxe, super deluxe, executive and suite rooms, wooden cottages, a dormitory for groups and a private villa.";
 
 export const Route = createFileRoute("/stay/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title },

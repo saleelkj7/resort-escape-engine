@@ -13,6 +13,7 @@ const description =
   "Open-air dining, breakfast and food packages for stays, day picnics and celebrations at Rehcruz D Retreat, Gorai, Mumbai.";
 
 export const Route = createFileRoute("/dining")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title },

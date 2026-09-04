@@ -30,6 +30,7 @@ import {
 import { siteConfig, mapsDirectionsHref, mapsEmbedHref, waMessages, whatsappHref } from "@/config/site";
 
 export const Route = createFileRoute("/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: `${siteConfig.name} — Resort in Gorai, Borivali West, Mumbai` },

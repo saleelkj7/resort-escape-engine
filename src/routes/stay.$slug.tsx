@@ -13,6 +13,7 @@ import { rooms, getRoom, roomPolicies } from "@/data/rooms";
 import { siteConfig, whatsappHref, waMessages } from "@/config/site";
 
 export const Route = createFileRoute("/stay/$slug")({
+  staticData: { sitemap: true },
   loader: ({ params }) => {
     const room = getRoom(params.slug);
     if (!room) throw notFound();

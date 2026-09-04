@@ -18,6 +18,7 @@ import { Route as ExperiencesRouteImport } from './routes/experiences'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as OffersRouteImport } from './routes/offers'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as WeddingsRouteImport } from './routes/weddings'
 import { Route as StayIndexRouteImport } from './routes/stay.index'
@@ -68,6 +69,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
@@ -99,6 +105,7 @@ export interface FileRoutesByFullPath {
   '/gallery': typeof GalleryRoute
   '/offers': typeof OffersRoute
   '/privacy': typeof PrivacyRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/weddings': typeof WeddingsRoute
   '/stay/$slug': typeof StaySlugRoute
@@ -114,6 +121,7 @@ export interface FileRoutesByTo {
   '/gallery': typeof GalleryRoute
   '/offers': typeof OffersRoute
   '/privacy': typeof PrivacyRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/weddings': typeof WeddingsRoute
   '/stay/$slug': typeof StaySlugRoute
@@ -130,6 +138,7 @@ export interface FileRoutesById {
   '/gallery': typeof GalleryRoute
   '/offers': typeof OffersRoute
   '/privacy': typeof PrivacyRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/weddings': typeof WeddingsRoute
   '/stay/$slug': typeof StaySlugRoute
@@ -147,6 +156,7 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/offers'
     | '/privacy'
+    | '/sitemap.xml'
     | '/terms'
     | '/weddings'
     | '/stay/$slug'
@@ -162,6 +172,7 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/offers'
     | '/privacy'
+    | '/sitemap.xml'
     | '/terms'
     | '/weddings'
     | '/stay/$slug'
@@ -177,6 +188,7 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/offers'
     | '/privacy'
+    | '/sitemap.xml'
     | '/terms'
     | '/weddings'
     | '/stay/$slug'
@@ -193,6 +205,7 @@ export interface RootRouteChildren {
   GalleryRoute: typeof GalleryRoute
   OffersRoute: typeof OffersRoute
   PrivacyRoute: typeof PrivacyRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
   WeddingsRoute: typeof WeddingsRoute
   StaySlugRoute: typeof StaySlugRoute
@@ -264,6 +277,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/terms': {
       id: '/terms'
       path: '/terms'
@@ -305,6 +325,7 @@ const rootRouteChildren: RootRouteChildren = {
   GalleryRoute: GalleryRoute,
   OffersRoute: OffersRoute,
   PrivacyRoute: PrivacyRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
   WeddingsRoute: WeddingsRoute,
   StaySlugRoute: StaySlugRoute,

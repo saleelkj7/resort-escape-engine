@@ -14,6 +14,7 @@ const description =
   "Stay, family, romantic and group packages at Rehcruz D Retreat, Gorai. Package details and rates are confirmed by the property on enquiry.";
 
 export const Route = createFileRoute("/offers")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title },

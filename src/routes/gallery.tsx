@@ -5,7 +5,7 @@ import { PageHero } from "@/components/site/page-hero";
 import { Lightbox } from "@/components/site/lightbox";
 import { Reveal } from "@/components/site/reveal";
 import { CtaBand } from "@/components/site/cta-band";
-import { galleryImages, galleryCategories } from "@/data/content";
+import { listGallery } from "@/lib/content.functions";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
 
@@ -15,6 +15,12 @@ const description =
 
 export const Route = createFileRoute("/gallery")({
   staticData: { sitemap: true },
+  loader: async () => ({ images: await listGallery() }),
+  errorComponent: () => (
+    <div className="mx-auto max-w-xl px-5 py-40 text-center text-sm text-muted-foreground">
+      We could not load the gallery just now. Please refresh and try again.
+    </div>
+  ),
   head: () => ({
     meta: [
       { title },
@@ -31,15 +37,18 @@ export const Route = createFileRoute("/gallery")({
 });
 
 function Gallery() {
+  const { images: allImages } = Route.useLoaderData();
   const [category, setCategory] = useState("All");
   const [index, setIndex] = useState<number | null>(null);
 
+  const galleryCategories = useMemo(
+    () => ["All", ...Array.from(new Set(allImages.map((i) => i.category)))],
+    [allImages],
+  );
+
   const images = useMemo(
-    () =>
-      category === "All"
-        ? galleryImages
-        : galleryImages.filter((i) => i.category === category),
-    [category],
+    () => (category === "All" ? allImages : allImages.filter((i) => i.category === category)),
+    [category, allImages],
   );
 
   return (

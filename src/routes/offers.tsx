@@ -6,7 +6,7 @@ import { SectionHeading } from "@/components/site/section-heading";
 import { Reveal } from "@/components/site/reveal";
 import { CtaBand } from "@/components/site/cta-band";
 import { Btn } from "@/components/site/btn";
-import { offers } from "@/data/content";
+import { listOffers } from "@/lib/content.functions";
 import { siteConfig, whatsappHref, waMessages } from "@/config/site";
 
 const title = `Offers & Packages — ${siteConfig.name}`;
@@ -15,6 +15,12 @@ const description =
 
 export const Route = createFileRoute("/offers")({
   staticData: { sitemap: true },
+  loader: async () => ({ offers: await listOffers() }),
+  errorComponent: () => (
+    <div className="mx-auto max-w-xl px-5 py-40 text-center text-sm text-muted-foreground">
+      We could not load our packages just now. Please refresh and try again.
+    </div>
+  ),
   head: () => ({
     meta: [
       { title },
@@ -31,6 +37,8 @@ export const Route = createFileRoute("/offers")({
 });
 
 function Offers() {
+  const { offers } = Route.useLoaderData();
+  const hasPlaceholder = offers.some((o) => o.placeholder);
   return (
     <>
       <PageHero
@@ -48,14 +56,16 @@ function Offers() {
           intro="Every package below is subject to availability, with the final tariff quoted at the time of enquiry."
         />
 
-        <Reveal delay={60} className="mt-8 border-l-2 border-gold bg-card p-5 text-sm text-foreground shadow-soft">
-          Placeholder content: these packages are development copy and have not yet been confirmed by
-          the property. Replace them with live offers before launch.
-        </Reveal>
+        {hasPlaceholder ? (
+          <Reveal delay={60} className="mt-8 border-l-2 border-gold bg-card p-5 text-sm text-foreground shadow-soft">
+            Some packages below are still marked as placeholders and have not been confirmed by the
+            property. They can be edited or removed in the admin panel.
+          </Reveal>
+        ) : null}
 
         <div className="mt-14 grid gap-8 md:grid-cols-2">
           {offers.map((o, i) => (
-            <Reveal key={o.title} delay={i * 70} as="article" className="group flex flex-col bg-card shadow-soft">
+            <Reveal key={o.id} delay={i * 70} as="article" className="group flex flex-col bg-card shadow-soft">
               <div className="relative aspect-[16/10] overflow-hidden">
                 <img
                   src={o.image}

@@ -6,7 +6,8 @@ import { RoomCard } from "@/components/site/room-card";
 import { Reveal } from "@/components/site/reveal";
 import { CtaBand } from "@/components/site/cta-band";
 import { BookingBar } from "@/components/site/booking-bar";
-import { rooms, roomPolicies } from "@/data/rooms";
+import { roomPolicies } from "@/data/rooms";
+import { listRooms } from "@/lib/content.functions";
 import { siteConfig } from "@/config/site";
 
 const title = `Rooms, Cottages & Villa — ${siteConfig.name}`;
@@ -15,6 +16,12 @@ const description =
 
 export const Route = createFileRoute("/stay/")({
   staticData: { sitemap: true },
+  loader: async () => ({ rooms: await listRooms() }),
+  errorComponent: () => (
+    <div className="mx-auto max-w-xl px-5 py-40 text-center text-sm text-muted-foreground">
+      We could not load our rooms just now. Please refresh, or call us and we will help.
+    </div>
+  ),
   head: () => ({
     meta: [
       { title },
@@ -31,6 +38,7 @@ export const Route = createFileRoute("/stay/")({
 });
 
 function StayIndex() {
+  const { rooms } = Route.useLoaderData();
   return (
     <>
       <PageHero

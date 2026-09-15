@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as BookingRouteImport } from './routes/booking'
@@ -22,12 +23,17 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as WeddingsRouteImport } from './routes/weddings'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as StayIndexRouteImport } from './routes/stay.index'
 import { Route as StaySlugRouteImport } from './routes/stay.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -90,6 +96,11 @@ const WeddingsRoute = WeddingsRouteImport.update({
   path: '/weddings',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const StayIndexRoute = StayIndexRouteImport.update({
   id: '/stay/',
   path: '/stay/',
@@ -115,6 +126,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/weddings': typeof WeddingsRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/stay/$slug': typeof StaySlugRoute
   '/stay/': typeof StayIndexRoute
 }
@@ -132,12 +144,14 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/weddings': typeof WeddingsRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/stay/$slug': typeof StaySlugRoute
   '/stay': typeof StayIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
   '/booking': typeof BookingRoute
@@ -150,6 +164,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/weddings': typeof WeddingsRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/stay/$slug': typeof StaySlugRoute
   '/stay/': typeof StayIndexRoute
 }
@@ -169,6 +184,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/weddings'
+    | '/admin'
     | '/stay/$slug'
     | '/stay/'
   fileRoutesByTo: FileRoutesByTo
@@ -186,11 +202,13 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/weddings'
+    | '/admin'
     | '/stay/$slug'
     | '/stay'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/about'
     | '/auth'
     | '/booking'
@@ -203,12 +221,14 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/weddings'
+    | '/_authenticated/admin'
     | '/stay/$slug'
     | '/stay/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
   AuthRoute: typeof AuthRoute
   BookingRoute: typeof BookingRoute
@@ -232,6 +252,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -318,6 +345,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WeddingsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/stay/': {
       id: '/stay/'
       path: '/stay'
@@ -335,8 +369,20 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   AuthRoute: AuthRoute,
   BookingRoute: BookingRoute,

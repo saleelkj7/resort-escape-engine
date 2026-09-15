@@ -24,10 +24,12 @@ export function EnquiryForm({ defaultType = "Room Booking" }: { defaultType?: st
   const [errors, setErrors] = useState<Errors>({});
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
+  const send = useServerFn(submitEnquiry);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.currentTarget)) as Record<string, string>;
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form)) as Record<string, string>;
     const next: Errors = {};
 
     if (!data["name"]?.trim() || data["name"].trim().length < 2) next.name = "Please enter your name.";

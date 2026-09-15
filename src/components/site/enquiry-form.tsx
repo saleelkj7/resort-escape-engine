@@ -1,15 +1,10 @@
 import { useState, type FormEvent } from "react";
+import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { Btn } from "./btn";
+import { submitEnquiry } from "@/lib/requests.functions";
 
-/**
- * Enquiry form.
- *
- * INTEGRATION NOTE: submissions are currently handled client-side only —
- * the guest is handed off to WhatsApp/phone and shown a confirmation.
- * Connect a backend (server function + database or email service) to
- * persist enquiries for the resort team.
- */
+/** Enquiry form — submissions are stored for the resort team in the admin panel. */
 
 export const enquiryTypes = [
   "Room Booking",

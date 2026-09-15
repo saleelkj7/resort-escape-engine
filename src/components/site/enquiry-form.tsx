@@ -47,11 +47,27 @@ export function EnquiryForm({ defaultType = "Room Booking" }: { defaultType?: st
     }
 
     setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 700));
-    setSubmitting(false);
-    setDone(true);
-    toast.success("Enquiry received. Our team will call you back shortly.");
-    e.currentTarget.reset();
+    try {
+      await send({
+        data: {
+          name: data["name"]!.trim(),
+          phone: data["phone"]!.trim(),
+          email: data["email"]?.trim() || undefined,
+          enquiryType: data["type"] || defaultType,
+          checkIn: data["checkIn"] || undefined,
+          checkOut: data["checkOut"] || undefined,
+          guests: data["guests"] ? Number(data["guests"]) : undefined,
+          message: data["message"]!.trim(),
+        },
+      });
+      setDone(true);
+      toast.success("Enquiry received. Our team will call you back shortly.");
+      form.reset();
+    } catch {
+      toast.error("We could not send your enquiry. Please call or WhatsApp us instead.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (done) {

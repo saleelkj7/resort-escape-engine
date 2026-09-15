@@ -1,5 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
+import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { Btn } from "@/components/site/btn";
 import { Reveal } from "@/components/site/reveal";
@@ -13,6 +14,7 @@ import {
   type BookingSearch,
 } from "@/lib/booking";
 import { cn } from "@/lib/utils";
+import { submitBookingRequest } from "@/lib/requests.functions";
 
 const title = `Book Your Stay — ${siteConfig.name}`;
 const description =
@@ -58,6 +60,8 @@ function BookingPage() {
 
   const [guest, setGuest] = useState<GuestDetails>({ name: "", email: "", phone: "", notes: "" });
   const [error, setError] = useState<string | null>(null);
+  const [sending, setSending] = useState(false);
+  const sendBooking = useServerFn(submitBookingRequest);
 
   const setSearch = (next: Partial<BookingSearch>) =>
     navigate({ search: (prev) => ({ ...prev, ...next }) });
@@ -496,6 +500,7 @@ function SummaryStep({
   roomName,
   onBack,
   onConfirm,
+  sending,
 }: {
   search: BookingSearch;
   guest: GuestDetails;
@@ -503,6 +508,7 @@ function SummaryStep({
   roomName?: string | undefined;
   onBack: () => void;
   onConfirm: () => void;
+  sending: boolean;
 }) {
   return (
     <div>
@@ -531,8 +537,8 @@ function SummaryStep({
         are confirmed by our team before anything is finalised.
       </p>
       <div className="mt-10 flex flex-wrap gap-4">
-        <Btn type="button" variant="gold" onClick={onConfirm}>
-          Send booking request
+        <Btn type="button" variant="gold" onClick={onConfirm} disabled={sending}>
+          {sending ? "Sending…" : "Send booking request"}
         </Btn>
         <Btn type="button" variant="outline" onClick={onBack}>
           Back

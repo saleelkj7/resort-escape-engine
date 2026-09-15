@@ -126,9 +126,31 @@ function BookingPage() {
                 nights={nights}
                 roomName={selectedRoom?.name}
                 onBack={() => setSearch({ step: "guest" })}
-                onConfirm={() => {
-                  toast.success("Request sent. Our team will be in touch shortly.");
-                  setSearch({ step: "confirmation" });
+                sending={sending}
+                onConfirm={async () => {
+                  setSending(true);
+                  try {
+                    await sendBooking({
+                      data: {
+                        guestName: guest.name.trim(),
+                        phone: guest.phone.trim(),
+                        email: guest.email.trim() || undefined,
+                        roomSlug: search.room,
+                        checkIn: search.checkIn,
+                        checkOut: search.checkOut,
+                        adults: search.adults,
+                        children: search.children,
+                        roomsCount: search.rooms,
+                        notes: guest.notes.trim(),
+                      },
+                    });
+                    toast.success("Request sent. Our team will be in touch shortly.");
+                    setSearch({ step: "confirmation" });
+                  } catch {
+                    toast.error("We could not send your request. Please call or WhatsApp us.");
+                  } finally {
+                    setSending(false);
+                  }
                 }}
               />
             ) : null}
